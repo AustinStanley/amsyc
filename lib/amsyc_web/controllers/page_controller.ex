@@ -6,4 +6,12 @@ defmodule AmsycWeb.PageController do
     # so skip the default app layout.
     render(conn, :home, layout: false)
   end
+
+  def band(conn, _params) do
+    posts = Amsyc.Posts.list_posts()
+
+    conn
+    |> assign(:posts, posts)
+    |> render(:band)
+  end
 end
