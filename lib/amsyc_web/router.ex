@@ -20,9 +20,15 @@ defmodule AmsycWeb.Router do
   scope "/", AmsycWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
+    get "/", PageController, :band
     get "/band", PageController, :band
     resources "/posts", PostController
+  end
+
+  scope "/admin", AmsycWeb do
+    pipe_through [:browser, :require_authenticated_user]
+
+    get "/", PageController, :admin
   end
 
   # Other scopes may use custom stacks.

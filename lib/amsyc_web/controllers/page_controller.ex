@@ -14,4 +14,8 @@ defmodule AmsycWeb.PageController do
     |> assign(:posts, posts)
     |> render(:band)
   end
+
+  def admin(conn, _params) do
+    text(conn, "This is the admin page")
+  end
 end
