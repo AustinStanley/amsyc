@@ -16,15 +16,18 @@ defmodule AmsycWeb.HomeLive do
   def render(assigns) do
     ~H"""
     Hello!
-
     <.modal id="create-post-modal">
       <div id="form" phx-update="ignore">
         <.simple_form for={@form} phx-change="validate" phx-submit="save-post">
           <label for={@uploads.image.ref}>Image</label>
-          <br>
+          <br />
           <.live_file_input upload={@uploads.image} />
           <.input field={@form[:title]} type="text" label="Title" />
-          <.input field={@form[:embedded_media]} type="textarea" label="Embed Code (YouTube, ReverbNation, etc.)" />
+          <.input
+            field={@form[:embedded_media]}
+            type="textarea"
+            label="Embed Code (YouTube, ReverbNation, etc.)"
+          />
           <.input field={@form[:body]} type="hidden" label="Body" id="trix-editor" />
           <trix-editor class="trix-content" input="trix-editor"></trix-editor>
           <.button type="submit" phx-disable-with="Saving...">Submit</.button>
@@ -80,11 +83,12 @@ defmodule AmsycWeb.HomeLive do
           socket
           |> put_flash(:info, "Post created successfully!")
           |> push_navigate(to: ~p"/")
-          {:noreply, socket}
+
+        {:noreply, socket}
+
       {:error, _changeset} ->
         {:noreply, socket}
     end
-
   end
 
   defp consume_files(socket) do

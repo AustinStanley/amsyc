@@ -1,6 +1,6 @@
 <%= for post <- @posts do %>
-    <div class="border-2 rounded p-1">
-        <div class="border-b-2"><%= post.title %></div>
-        <div class="trix-content"><%= raw post.body %></div>
-    </div>
+  <div class="border-2 rounded p-1">
+    <div class="border-b-2"><%= post.title %></div>
+    <div class="trix-content"><%= raw(post.body) %></div>
+  </div>
 <% end %>

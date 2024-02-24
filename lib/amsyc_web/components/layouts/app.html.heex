@@ -8,7 +8,10 @@
         <img src={~p"/images/amsyc.svg"} width="400" />
       </span>
     </div>
-    <div :if={assigns[:logged_in]} class="flex items-center gap-4 font-semibold leading-6 text-zinc-900">
+    <div
+      :if={assigns[:logged_in]}
+      class="flex items-center gap-4 font-semibold leading-6 text-zinc-900"
+    >
       <span
         class="rounded-lg bg-zinc-100 px-2 py-1 hover:bg-zinc-200/80 cursor-pointer"
         phx-click={show_modal("create-post-modal")}
