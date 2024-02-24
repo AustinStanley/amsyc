@@ -20,7 +20,7 @@ defmodule AmsycWeb.Router do
   scope "/", AmsycWeb do
     pipe_through :browser
 
-    get "/", PageController, :band
+    live "/", HomeLive, :index
     get "/band", PageController, :band
     resources "/posts", PostController
   end
