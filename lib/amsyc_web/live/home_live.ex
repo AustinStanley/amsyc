@@ -18,9 +18,16 @@ defmodule AmsycWeb.HomeLive do
   def render(assigns) do
     ~H"""
     <div id="feed" class="flex flex-col gap-2" phx-update="stream">
-      <div :for={{dom_id, post} <- @streams.posts} id={dom_id} class="flex flex-col gap-2 w-full mx-auto border rounded p-4">
+      <div
+        :for={{dom_id, post} <- @streams.posts}
+        id={dom_id}
+        class="flex flex-col gap-2 w-full mx-auto border rounded p-4"
+      >
         <img :if={post.image} src={Images.get_image!(post.image).path} />
-        <%= raw post.body %>
+        <div :if={post.embedded_media}>
+          <%= raw(post.embedded_media) %>
+        </div>
+        <%= raw(post.body) %>
       </div>
     </div>
 
@@ -81,7 +88,6 @@ defmodule AmsycWeb.HomeLive do
   @impl true
   def handle_event("save-post", %{"post" => post_params}, socket) do
     %{user_id: user} = socket.assigns
-
 
     {:ok, image} =
       %{path: List.first(consume_files(socket))}
