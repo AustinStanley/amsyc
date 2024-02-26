@@ -5,6 +5,8 @@ defmodule AmsycWeb.HomeLive do
   alias Amsyc.Posts
   alias Amsyc.Posts.Post
 
+  alias Amsyc.Images
+
   @impl true
   def render(%{loading: true} = assigns) do
     ~H"""
@@ -15,7 +17,13 @@ defmodule AmsycWeb.HomeLive do
   @impl true
   def render(assigns) do
     ~H"""
-    Hello!
+    <div id="feed" class="flex flex-col gap-2" phx-update="stream">
+      <div :for={{dom_id, post} <- @streams.posts} id={dom_id} class="flex flex-col gap-2 w-full mx-auto border rounded p-4">
+        <img :if={post.image} src={Images.get_image!(post.image).path} />
+        <%= raw post.body %>
+      </div>
+    </div>
+
     <.modal id="create-post-modal">
       <div id="form" phx-update="ignore">
         <.simple_form for={@form} phx-change="validate" phx-submit="save-post">
@@ -25,7 +33,7 @@ defmodule AmsycWeb.HomeLive do
           <.input field={@form[:title]} type="text" label="Title" />
           <.input
             field={@form[:embedded_media]}
-            type="textarea"
+            type="text"
             label="Embed Code (YouTube, ReverbNation, etc.)"
           />
           <.input field={@form[:body]} type="hidden" label="Body" id="trix-editor" />
@@ -57,6 +65,7 @@ defmodule AmsycWeb.HomeLive do
         socket
         |> assign(form: form, logged_in: !!user_token, user_id: user_id, loading: false)
         |> allow_upload(:image, accept: ~w(.png .jpg), max_entries: 1)
+        |> stream(:posts, Posts.list_posts())
 
       {:ok, socket}
     else
@@ -73,9 +82,14 @@ defmodule AmsycWeb.HomeLive do
   def handle_event("save-post", %{"post" => post_params}, socket) do
     %{user_id: user} = socket.assigns
 
+
+    {:ok, image} =
+      %{path: List.first(consume_files(socket))}
+      |> Images.create_image()
+
     post_params
-    |> Map.put("user_id", user)
-    |> Map.put("image", List.first(consume_files(socket)))
+    |> Map.put("user", user.id)
+    |> Map.put("image", image.id)
     |> Posts.create_post()
     |> case do
       {:ok, _post} ->
@@ -86,7 +100,9 @@ defmodule AmsycWeb.HomeLive do
 
         {:noreply, socket}
 
-      {:error, _changeset} ->
+      # TODO: do something more helpful on error
+      {:error, changeset} ->
+        IO.inspect(changeset)
         {:noreply, socket}
     end
   end
