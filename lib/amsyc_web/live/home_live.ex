@@ -21,8 +21,11 @@ defmodule AmsycWeb.HomeLive do
       <div
         :for={{dom_id, post} <- @streams.posts}
         id={dom_id}
-        class="flex flex-col gap-2 w-full mx-auto border rounded p-4"
+        class="flex flex-col gap-2 w-full mx-auto text-brand rounded p-4"
       >
+        <div class="flex w-full justify-center font-semibold">
+          <%= post.title %>
+        </div>
         <img :if={post.image} src={Images.get_image!(post.image).path} />
         <div :if={post.embedded_media}>
           <%= raw(post.embedded_media) %>

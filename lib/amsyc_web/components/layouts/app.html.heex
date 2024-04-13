@@ -1,5 +1,5 @@
 <header class="px-4 sm:px-6 lg:px-8">
-  <div class="flex items-center justify-between border-b border-zinc-100 py-3 text-sm">
+  <div class="flex items-center justify-between border-b-2 border-brand py-3 text-sm">
     <div class="flex items-center gap-4">
       <a href="/">
         <img src={~p"/images/leaf.svg"} width="100" class="pb-4" />
@@ -35,7 +35,7 @@
 <.modal id="login-modal">
   <.live_component module={AmsycWeb.UserLoginComponent} id="user-login" />`
 </.modal>
-<main class="px-4 py-20 sm:px-6 lg:px-8">
+<main class="px-4 py-20 sm:px-6 lg:px-8 font-serif">
   <div class="mx-auto max-w-2xl">
     <.flash_group flash={@flash} />
     <%= @inner_content %>

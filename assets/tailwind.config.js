@@ -14,7 +14,13 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        brand: "#FD4F00",
+        brand: "#446D21",
+        primary: "#AA6729",
+        surface: "#F4FCEA",
+        post: "#A6AE9D"
+      },
+      fontFamily: {
+        libre: ['"Libre Baskerville"', "serif"]
       }
     },
   },
