@@ -17,20 +17,22 @@ defmodule AmsycWeb.HomeLive do
   @impl true
   def render(assigns) do
     ~H"""
-    <div id="feed" class="flex flex-col gap-2" phx-update="stream">
+    <div id="feed" class="flex flex-col gap-20 overflow-scroll" phx-update="stream">
       <div
         :for={{dom_id, post} <- @streams.posts}
         id={dom_id}
-        class="flex flex-col gap-2 w-full mx-auto text-brand rounded p-4"
+        class="flex flex-col gap-2 w-full mx-auto text-brand bg-zinc-900 bg-opacity-80 p-4 border-l-8 border-l-blue-500"
       >
-        <div class="flex w-full justify-center font-semibold">
+        <div class="flex w-full bg-zinc-200 justify-center items-center px-4 py-3 text-zinc-900 text-3xl font-sans font-thin tracking-[0.75em]">
           <%= post.title %>
         </div>
-        <img :if={post.image} src={Images.get_image!(post.image).path} />
+        <img :if={post.image} src={Images.get_image!(post.image).path} class="border-8 border-zinc-400" />
         <div :if={post.embedded_media}>
           <%= raw(post.embedded_media) %>
         </div>
-        <%= raw(post.body) %>
+        <div class="p-2 border border-zinc-200 font-light font-mono text-zinc-200">
+          <%= raw(post.body) %>
+        </div>
       </div>
     </div>
 

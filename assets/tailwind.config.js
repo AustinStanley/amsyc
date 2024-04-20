@@ -14,13 +14,16 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        brand: "#446D21",
+        brand: "#FFFFFF",
         primary: "#AA6729",
         surface: "#F4FCEA",
         post: "#A6AE9D"
       },
       fontFamily: {
         libre: ['"Libre Baskerville"', "serif"]
+      },
+      backgroundImage: {
+        'band': "url('../priv/static/images/bg.jpg)"
       }
     },
   },

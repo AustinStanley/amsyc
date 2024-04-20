@@ -1,6 +1,6 @@
 <header class="px-4 sm:px-6 lg:px-8">
-  <div class="flex items-center justify-between border-b-2 border-brand py-3 text-sm">
-    <div class="flex items-center gap-4">
+  <div class="flex items-center bg-zinc-900 bg-opacity-70 p-5 justify-between border-l-8 border-l-yellow-300 py-3 text-sm">
+    <div class="flex items-center gap-4 px-5 py-1">
       <a href="/">
         <img src={~p"/images/leaf.svg"} width="100" class="pb-4" />
       </a>
@@ -13,7 +13,7 @@
       class="flex items-center gap-4 font-semibold leading-6 text-zinc-900"
     >
       <span
-        class="rounded-lg bg-zinc-100 px-2 py-1 hover:bg-zinc-200/80 cursor-pointer"
+        class="bg-zinc-200 px-2 py-1 hover:bg-zinc-200/80 cursor-pointer"
         phx-click={show_modal("create-post-modal")}
       >
         Add Post <span aria-hidden="true">&rarr;</span>
@@ -36,7 +36,7 @@
   <.live_component module={AmsycWeb.UserLoginComponent} id="user-login" />`
 </.modal>
 <main class="px-4 py-20 sm:px-6 lg:px-8 font-serif">
-  <div class="mx-auto max-w-2xl">
+  <div class="mx-auto max-w-3xl overflow-scroll h-screen pb-96">
     <.flash_group flash={@flash} />
     <%= @inner_content %>
   </div>

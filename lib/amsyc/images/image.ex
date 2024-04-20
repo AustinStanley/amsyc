@@ -12,6 +12,5 @@ defmodule Amsyc.Images.Image do
   def changeset(image, attrs) do
     image
     |> cast(attrs, [:path])
-    |> validate_required([:path])
   end
 end
