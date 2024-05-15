@@ -17,7 +17,7 @@ defmodule AmsycWeb.HomeLive do
   @impl true
   def render(assigns) do
     ~H"""
-    <div id="feed" class="flex flex-col gap-20 overflow-scroll" phx-update="stream">
+    <div id="feed" class="flex flex-col gap-20 pb-96" phx-update="stream">
       <div
         :for={{dom_id, post} <- @streams.posts}
         id={dom_id}
