@@ -19,23 +19,9 @@
         Add Post <span aria-hidden="true">&rarr;</span>
       </span>
     </div>
-    <div
-      :if={!assigns[:logged_in]}
-      class="flex items-center gap-4 font-semibold leading-6 text-zinc-900"
-    >
-      <span
-        class="rounded-lg bg-zinc-100 px-2 py-1 hover:bg-zinc-200/80 cursor-pointer"
-        phx-click={show_modal("login-modal")}
-      >
-        Log In <span aria-hidden="true">&rarr;</span>
-      </span>
-    </div>
   </div>
 </header>
-<.modal id="login-modal">
-  <.live_component module={AmsycWeb.UserLoginComponent} id="user-login" />`
-</.modal>
-<main class="px-4 pb-20 pt-10 sm:px-6 lg:px-8 font-serif">
+<main class="px-4 pb-20 pt-10 sm:px-6 lg:px-8 font-serif overflow-hidden">
   <div class="mx-auto max-w-4xl overflow-scroll h-screen pb-96">
     <.flash_group flash={@flash} />
     <%= @inner_content %>
